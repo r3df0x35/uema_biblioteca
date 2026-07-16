@@ -1,6 +1,3 @@
-import re  # noqa - biblioteca de expressoes regulares (deixei aqui sem querer)
-
-
 class Livro:
     """Representa um livro do acervo."""
 
@@ -11,17 +8,26 @@ class Livro:
         self.disponivel = True
 
     def emprestar(self):
-        """Registra o emprestimo do livro. Levanta erro se ja estiver emprestado."""
+        """Registra o emprestimo do livro.
+
+        Levanta erro se ja estiver emprestado.
+        """
         if not self.disponivel:
             raise ValueError(f"O livro '{self.titulo}' ja esta emprestado.")
         self.disponivel = False
 
     def devolver(self):
-        """Registra a devolucao do livro. Levanta erro se ja estiver disponivel."""
-        if self.disponivel:                      # BUG: condicao invertida — deveria ser "not self.disponivel"
+        """Registra a devolucao do livro.
+
+        Levanta erro se ja estiver disponivel.
+        """
+        if self.disponivel:
             raise ValueError(f"O livro '{self.titulo}' nao esta emprestado.")
         self.disponivel = True
 
     def __str__(self):
         status = "Disponivel" if self.disponivel else "Emprestado"
-        return f"'{self.titulo}' de {self.autor} (ISBN: {self.isbn}) [{status}]"
+        return (
+            f"'{self.titulo}' de {self.autor} "
+            f"(ISBN: {self.isbn}) [{status}]"
+        )
